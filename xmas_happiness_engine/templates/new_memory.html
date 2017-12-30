@@ -3,9 +3,9 @@
     <div class="row">
         <div class="col-twelve">
             <div class="home-bottom-text">
-                <div class="animate-intro" style="overflow-y: scroll; height:65vh; padding:2rem;border:none;">
-                    <h3 v-if="fault" style="text-align:center; color:white; vertical-align:middle;"> System Error. Please login before recalling new memories </h3>
-                    <h3 v-else style="text-align:center; color:white;">[[ memory.date ]]</h3>
+                <div class="animate-intro" style="padding:2rem;border:none;">
+                    <h3 v-if="fault" style="text-align:center; color:white;"> Please login before recalling new memories </h3>
+                    <h3 v-else style="overflow-y: scroll; height:65vh; text-align:center; color:white;">[[ memory.date ]]</h3>
                     <div v-for="item in memory.messages" style="color:white;vertical-align:middle;border:none;">
                         <div v-if="item.author === 'ric'" style="text-align:left;">
                             <img style="display:inline-block;" class="avatar" v-bind:src="'{% static '/pics/ric/' %}'+memory.pics.ric" alt="avatar"/>
