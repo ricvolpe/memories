@@ -3,10 +3,11 @@
     <div class="row">
         <div class="col-twelve">
             <div class="home-bottom-text">
-                <div class="animate-intro" style="padding:2rem;border:none;">
+                <div class="animate-intro" style="border:none;">
                     <h3 v-if="fault" style="text-align:center; color:white;"> Please login before recalling new memories </h3>
-                    <h3 v-else style="overflow-y: scroll; height:65vh; text-align:center; color:white;">[[ memory.date ]]</h3>
-                    <div v-for="item in memory.messages" style="color:white;vertical-align:middle;border:none;">
+                    <div v-else style="overflow-y: scroll; height:65vh;">
+                    <h3 style="text-align:center; color:white;">[[ memory.date ]]</h3>
+                    <div v-for="item in memory.messages" style="padding:2rem;color:white;vertical-align:middle;border:none;">
                         <div v-if="item.author === 'ric'" style="text-align:left;">
                             <img style="display:inline-block;" class="avatar" v-bind:src="'{% static '/pics/ric/' %}'+memory.pics.ric" alt="avatar"/>
                             <div class="message">[[ item.message ]]</div>
@@ -15,6 +16,7 @@
                             <div class='message'>[[ item.message ]]</div>
                             <img style="display:inline-block;" class="avatar" v-bind:src="'{% static '/pics/chen/' %}'+memory.pics.chen" alt="avatar"/>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div> <!-- end home-bottom-text -->
