@@ -1,0 +1,1 @@
+~/.virtualenvs/xmas_happiness_engine/bin/python manage.py runserver 127.0.0.1:62131 --settings=xmas_happiness_engine.settings

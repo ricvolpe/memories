@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- login
+    ================================================== -->
+    <section id="home">
+        <div class="overlay"></div><div class="gradient-overlay"></div>
+        <div class="home-content-table">
+            <div class="home-content-tablecell" style="display:block;">
+                <div class="row" style="padding-bottom:2%;">
+                    <div class="col-twelve">
+
+                        <div style="text-align:center;margin:10%;">
+                            <form id='loginDiv' action="{% url 'login' %}" method="post" accept-charset="utf-8">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    <label style="color:white;">{{ field.label }}</label>
+                                    {% if field.errors %}
+                                        {{ field.errors }}
+                                    {% endif %}
+                                    {{ field }}
+                                {% endfor %}
+                                <input type="hidden" name="next" value="{{ next }}" />
+                                <input class="button small" type="submit" value="Submit"/>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end home-content-table -->
+    </section> <!-- end section -->
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- home
+    ================================================== -->
+    <section id="home">
+        <div class="overlay"></div><div class="gradient-overlay"></div>
+
+        <div class="home-content-table">
+
+            <div class="home-content-tablecell" style="display:block;"> <!--header menu-->
+                <div class="row" style="padding-bottom:2%;">
+                    <div class="col-twelve">
+                        <ul class="home-section-links">
+                            {% if user.is_authenticated %}
+                            <li class="animate-intro">Logout <a href="{% url 'logout' %}">memories</a></li>
+                            {% else %}
+                            <li class="animate-intro">Login <a href="{% url 'login' %}">memories</a></li>
+                            {% endif %}
+                            <li class="animate-intro">Recall <a href="#" onclick="location.reload()">new memory</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> <!--end of menu-->
+
+            {% include 'home_input.html' %}
+            {% include 'new_memory.html' %}
+
+        </div> <!-- end home-content-table -->
+    </section> <!-- end home -->
+{% endblock %}
