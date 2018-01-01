@@ -37,15 +37,15 @@
         document.getElementById('notes').style.display = 'none'
 
         if (FIRST_CALL_mem == true) {
-            var vueNewMemory = new Vue({
+            vueNewMemory = new Vue({
               delimiters: ['[[', ']]'],
               el: '#new_memory',
               data: {
                 memory: [],
                 errors: [],
+                create: create,
                 fault: false,
                 menu: false,
-                create: create,
                 },
               mounted () {
                 var self = this
@@ -61,6 +61,21 @@
                 })
               },
             })
+        } else {
+        vueNewMemory.create = create
+        vueNewMemory.memory = []
+        vueNewMemory.errors = []
+        vueNewMemory.fault = false
+        vueNewMemory.menu = false
+        axios.get(tht2memApi).then(response => {
+          // JSON responses are automatically parsed.
+          vueNewMemory.memory = response.data
+          vueNewMemory.menu = true
+        })
+        .catch(e => {
+          vueNewMemory.errors.push(e)
+          vueNewMemory.fault = true
+        })
         }
         FIRST_CALL_mem = false
     };
@@ -82,7 +97,7 @@
         document.getElementById('notes').style.display = 'block';
 
         if (FIRST_CALL_note == true) {
-            var vueNotes = new Vue({
+            vueNotes = new Vue({
               delimiters: ['[[', ']]'],
               el: '#notes',
               data: {
@@ -155,9 +170,13 @@
                     this.postLinked = item.linked
                     this.postMemId = item.memory_id
                     this.showModal = true
-                    console.log(this.showModal)
                 }
               }
             })
-        } FIRST_CALL_note = false
+        } else {
+        vueNotes.blogTitle = thought
+        vueNotes.preLinked = linked
+        vueNotes.preMemId = memId
+        }
+        FIRST_CALL_note = false
     };
