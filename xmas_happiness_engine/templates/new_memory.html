@@ -7,11 +7,11 @@
                     <h3 v-if="fault" style="text-align:center; color:white;"> System error. If you have not yet, please login </h3>
                     <div v-else style="overflow-y: scroll; height:65vh;">
                       <h3 style="text-align:center; color:white;">[[ memory.date ]]</h3>
-                      <ul v-if="menu" class="home-section-links" style="marigin:none;text-align:center;width: 100%;"><li>Write a note <a style="cursor:pointer;" @click="ssWriteNotes(true,memory.id);">about this memory</a></li></ul>
+                      <ul v-if="menu" class="home-section-links" style="marigin:none;text-align:center;width: 100%;"><li v-if="create">Write a note <a style="cursor:pointer;" @click="ssWriteNotes(true,memory.id,memory.thought);">about this memory</a></li></ul>
                       <div v-for="item in memory.messages" style="padding:2rem;color:white;vertical-align:middle;border:none;">
                         <div v-if="item.author === 'ric'" style="text-align:left;">
-                            <img style="display:inline-block;" class="avatar" v-bind:src="'{% static '/pics/ric/' %}'+memory.pics.ric" alt="avatar"/>
-                            <div class="message">[[ item.message ]]</div>
+                          <img style="display:inline-block;" class="avatar" v-bind:src="'{% static '/pics/ric/' %}'+memory.pics.ric" alt="avatar"/>
+                          <div class="message">[[ item.message ]]</div>
                         </div>
                         <div v-if="item.author === 'chen'" style="text-align:right;" >
                             <div class='message'>[[ item.message ]]</div>
