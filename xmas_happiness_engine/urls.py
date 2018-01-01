@@ -24,5 +24,7 @@ urlpatterns = [
     url(regex=r'^login/$', view=login, kwargs={'template_name': 'login.html'}, name='login'),
     url(regex=r'^logout/$', view=logout, kwargs={'next_page': '/'}, name='logout'),
     url(r'^$', views.index, name='index'),
-    url(r'ttm/(?P<thought>[\w\-]+)$',views.thought_to_memory)
+    url(r'ttm/(?P<thought>[\w\-]+)$',views.thought_to_memory),
+    url(r'^newnote$',views.post_note),
+    url(r'^notes',views.get_all_notes)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -6,7 +6,7 @@
         <div class="overlay"></div><div class="gradient-overlay"></div>
 
         <div class="home-content-table">
-
+        {% include 'vuejs_modal.html' %}
             <div class="home-content-tablecell" style="display:block;"> <!--header menu-->
                 <div class="row" style="padding-bottom:2%;">
                     <div class="col-twelve">
@@ -16,7 +16,8 @@
                             {% else %}
                             <li class="animate-intro">Login <a href="{% url 'login' %}">memories</a></li>
                             {% endif %}
-                            <li class="animate-intro">Recall <a href="#" onclick="location.reload()">new memory</a></li>
+                            <li class="animate-intro">Recall <a style="cursor:pointer;" onclick="ssNewRecall()">new memory</a></li>
+                            <li class="animate-intro">Write <a style="cursor:pointer;" onclick="ssWriteNotes();">notes</a></li>
                         </ul>
                     </div>
                 </div>
@@ -24,6 +25,7 @@
 
             {% include 'home_input.html' %}
             {% include 'new_memory.html' %}
+            {% include 'note.html' %}
 
         </div> <!-- end home-content-table -->
     </section> <!-- end home -->

@@ -1,10 +1,15 @@
 import os
 import random
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
 from xmas_happiness_engine.static.static_dirs.pics.outloc import PICLOC
-from .matching import tought_to_memory
+from xmas_happiness_engine.matching import tought_to_memory
+from xmas_happiness_engine.models import Note
+from xmas_happiness_engine.serializers import NoteSerializer
 
 def index(request):
     return render(request, 'index.html', {})
@@ -45,3 +50,27 @@ def shuffle_pics(request):
     c = random.choice(range(1,len(CHENpics)+1))
 
     return r,c
+
+@login_required
+@api_view(['POST'])
+def post_note(request):
+
+    if request.method == 'POST':
+        serializer = NoteSerializer(data=request.data)
+        serializer.initial_data['user'] = str(request.user)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@login_required
+@api_view(['GET'])
+def get_all_notes(request):
+
+    notes = Note.objects.all().order_by('created').reverse()
+    serializer = NoteSerializer(notes, many=True)
+
+    return JsonResponse(serializer.data, safe=False)
+
