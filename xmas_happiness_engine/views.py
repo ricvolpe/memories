@@ -1,14 +1,15 @@
 import os
 import random
+import json
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from xmas_happiness_engine.static.static_dirs.pics.outloc import PICLOC
 from xmas_happiness_engine.matching import tought_to_memory
-from xmas_happiness_engine.models import Note
+from xmas_happiness_engine.models import Note, Memory
 from xmas_happiness_engine.serializers import NoteSerializer
 
 def index(request):
@@ -35,6 +36,21 @@ def thought_to_memory(request, thought):
     pics['chen'] = str(c) + '.jpg'
     pics['ric'] = str(r) + '.jpg'
     memory['pics'] = pics
+    memory['thought'] = thought
+    mem_to_data = json.dumps(memory)
+    data_mem = Memory.objects.create(
+        memory=mem_to_data
+    )
+    memory['id'] = data_mem.id
+
+    return JsonResponse(memory)
+
+@login_required()
+def datab_to_memory(request, mem_id):
+
+    data_mem = get_object_or_404(Memory, id=mem_id)
+
+    memory = json.loads(data_mem.memory)
 
     return JsonResponse(memory)
 

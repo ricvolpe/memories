@@ -9,23 +9,20 @@
     Vue.component('modal', {
       template: '#modal-template'
     })
-    /* New memory HTML initiator (showing-hiding divs)
-	* ------------------------------------------------------ */
-    var ssNewRecall = function(input) {
-
-        document.getElementById('homeinput').style.display = 'block';
-        document.getElementById('notes').style.display = 'none';
-        document.getElementById('new_memory').style.display = 'none';
-
-    }
-
   /* VueJS Creating memory
 	* ------------------------------------------------------ */
-	var ssCreateMemory = function(input) {
+	var ssCreateMemory = function(input, create, mem_id) {
 
         var EngineRoot = 'http://' + window.location.hostname + ':' + window.location.port
         var APIinput = input.replace(/ /gi, "-");
-        var tht2memApi = EngineRoot + '/ttm/' + APIinput
+
+        if (create == true) {
+            var tht2memApi = EngineRoot + '/ttm/' + APIinput
+        } else {
+            var tht2memApi = EngineRoot + '/dbtm/' + mem_id
+        }
+
+
 
         document.getElementById('homeinput').style.display = 'none';
         document.getElementById('notes').style.display = 'none';
@@ -39,13 +36,15 @@
             memory: [],
             errors: [],
             fault: false,
+            menu: false,
             },
-          created () {
+          mounted () {
             var self = this
             self.memory = APIinput
             axios.get(tht2memApi).then(response => {
               // JSON responses are automatically parsed.
               this.memory = response.data
+              this.menu = true
             })
             .catch(e => {
               this.errors.push(e)
@@ -62,7 +61,10 @@
           blog.style.height = blog.scrollHeight+"px";
       }
 
-	var ssWriteNotes = function(input) {
+	var ssWriteNotes = function(linked, mem_id) {
+
+	    console.log(linked)
+	    console.log(mem_id)
 
         var EngineRoot = 'http://' + window.location.hostname + ':' + window.location.port
         var NotesAPI = EngineRoot + '/notes'

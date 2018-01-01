@@ -25,6 +25,7 @@ urlpatterns = [
     url(regex=r'^logout/$', view=logout, kwargs={'next_page': '/'}, name='logout'),
     url(r'^$', views.index, name='index'),
     url(r'ttm/(?P<thought>[\w\-]+)$',views.thought_to_memory),
+    url(r'dbtm/(?P<mem_id>[\w\-]+)$',views.datab_to_memory),
     url(r'^newnote$',views.post_note),
     url(r'^notes',views.get_all_notes)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
