@@ -21,6 +21,12 @@
         document.getElementById('new_memory').style.display = 'none'
 
   }
+
+  var ssSubmitMemory = function () {
+
+        var memInput = document.getElementById('memInput').value
+        ssCreateMemory(memInput, true, 0)
+  }
   /* ----------------------------------------------------- */
   /* VueJS Creating memory
   * ------------------------------------------------------ */

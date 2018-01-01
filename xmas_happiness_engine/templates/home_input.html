@@ -6,8 +6,8 @@
                 <h1 class="animate-intro">
                 What are you thinking about?<br>
                 </h1>
-                <input class="animate-intro" type="text" onchange="ssCreateMemory(this.value, true, 0)" onsubmit="ssCreateMemory(this.value, true, 0)">
-                <button>RECALL</button>
+                <input id='memInput' class="animate-intro" type="text" style="margin-bottom:1rem;">
+                <div style="cursor:pointer;" onclick="ssSubmitMemory()"><h4 style="color:white;text-align:right;" class="animate-intro">recall memory</h4></div>
             </div> <!-- end home-bottom-text -->
         </div> <!-- end col-twelve -->
     </div> <!-- end row -->
