@@ -72,6 +72,10 @@ def shuffle_pics(request):
 def post_note(request):
 
     if request.method == 'POST':
+
+        if 'memory_id' in request.data.keys() and request.data['memory_id'] == 0:
+            request.data.pop('memory_id', None)
+
         serializer = NoteSerializer(data=request.data)
         serializer.initial_data['user'] = str(request.user)
         if serializer.is_valid():

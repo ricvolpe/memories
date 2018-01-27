@@ -8,7 +8,8 @@ class NoteSerializer(serializers.Serializer):
     text = serializers.CharField()
     title = serializers.CharField()
     linked = serializers.BooleanField(default=False)
-    memory_id = serializers.PrimaryKeyRelatedField(many=False, queryset=Memory.objects.all())
+    memory_id = serializers.PrimaryKeyRelatedField(many=False, required=False, queryset=Memory.objects.all())
 
     def create(self, validated_data):
+
         return Note.objects.create(**validated_data)

@@ -94,6 +94,8 @@
 
 	var ssWriteNotes = function(linked, memId, thought) {
 
+	    console.log(memId)
+
         var EngineRoot = 'http://' + window.location.hostname + ':' + window.location.port
         var NotesAPI = EngineRoot + '/notes'
         var postNote = EngineRoot + '/newnote'
@@ -133,7 +135,6 @@
               },
               methods: {
                 postNewNote () {
-                    var self = this
                     axios.post(postNote, {
                         text: this.blogText,
                         title: this.blogTitle,

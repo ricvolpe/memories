@@ -15,5 +15,4 @@ class Note(models.Model):
     text = models.CharField(max_length=100000)
     title = models.CharField(max_length=255)
     linked = models.BooleanField(default=False)
-    memory_id = models.ForeignKey(Memory, on_delete=models.CASCADE, default=0)
-
+    memory_id = models.ForeignKey(Memory, on_delete=models.CASCADE, null=True)
