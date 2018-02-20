@@ -7,7 +7,7 @@
     <h5 v-if="postLinked" class="notetitle" style="color:black;">Based on <a style="cursor:pointer;" @click="showModal = false; ssCreateMemory('', false, postMemId)">this</a> memory</h5>
     </div>
       <div slot="body" style="height:40vh;">
-        <p style="font-family:'montserrat', sans-serif">[[ text ]]</p>
+        <p style="font-family:'montserrat', sans-serif; word-wrap: break-word;">[[ text ]]</p>
     </div>
     <span slot="footer">&nbsp;</span>
   </modal>
@@ -24,9 +24,10 @@
               <input placeholder="Title" style="display:inline-block;height:38px;width:50%;border-left:solid 4px;font-size: 22px;padding:.5rem;background-color: rgba(0, 0, 0, 0.3)" type="text" v-model="blogTitle">
               <button style="float: right;height: 3.8rem;line-height: 3rem;" @click.prevent="postNewNote">post note</button>
             </form>
+            <br>
             <div style="overflow-y: scroll; height:32vh;">
               <div v-for="item in notes">
-                <h4 class="notetitle" @click="itemClicked(item)">[[item.title]]<i style="margin-left: 1.5rem;">[[item.user]]</i><span style="float:right">[[item.created]]</span></h4>
+                <h4 style="display:table;" class="notetitle" @click="itemClicked(item)">[[item.title]]<i style="margin-left: 1.5rem;margin-right: 1.5rem;">[[item.user]]</i><span style="float:right">[[item.created]]</span></h4>
               </div>
             </div>
           </div>
