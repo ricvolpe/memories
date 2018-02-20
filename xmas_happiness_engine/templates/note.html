@@ -1,5 +1,16 @@
 {% load staticfiles %}
 <div class="home-content-tablecell" id="notes" style="display:none; vertical-align:top;"> <!--component container-->
+  <!-- use the modal component, pass in the prop -->
+  <modal v-if="showModal" @close="showModal = false">
+    <div slot="header">
+    <h4 class="notetitle" style="color:black;">[[title]]<i style="margin-left: 1.5rem;">[[user]]</i></h4>
+    <h5 v-if="postLinked" class="notetitle" style="color:black;">Based on <a style="cursor:pointer;" @click="showModal = false; ssCreateMemory('', false, postMemId)">this</a> memory</h5>
+    </div>
+      <div slot="body" style="height:40vh;">
+        <p style="font-family:'montserrat', sans-serif">[[ text ]]</p>
+    </div>
+    <span slot="footer">&nbsp;</span>
+  </modal>
   <div class="row">
     <div class="col-twelve">
       <div class="home-bottom-text">
@@ -16,23 +27,11 @@
             <div style="overflow-y: scroll; height:32vh;">
               <div v-for="item in notes">
                 <h4 class="notetitle" @click="itemClicked(item)">[[item.title]]<i style="margin-left: 1.5rem;">[[item.user]]</i><span style="float:right">[[item.created]]</span></h4>
-                <!-- use the modal component, pass in the prop -->
-                  <modal v-if="showModal" @close="showModal = false">
-                    <div slot="header">
-                    <h4 class="notetitle" style="color:black;">[[title]]<i style="margin-left: 1.5rem;">[[user]]</i></h4>
-                    <h5 v-if="postLinked" class="notetitle" style="color:black;">Based on <a style="cursor:pointer;" @click="showModal = false; ssCreateMemory('', false, postMemId)">this</a> memory</h5>
-                    </div>
-                      <div slot="body" style="height:40vh;">
-                        <p style="font-family:'montserrat', sans-serif">[[ text ]]</p>
-                    </div>
-                    <span slot="footer">&nbsp;</span>
-                  </modal>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div> <!-- end home-bottom-text -->
-        </div> <!-- end col-twelve -->
-    </div> <!-- end row -->
+    </div> <!-- end col-twelve -->
+  </div> <!-- end row -->
 </div> <!--end of component container-->
